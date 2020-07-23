@@ -1,0 +1,123 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//192.168.2.216:1521/GTSSDB
+    username: admin
+    password: admin
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+  redis:
+    hostName: 192.168.2.225
+    port: 6379
+    password: redis12345
+    database: 2
+    timeout: 0
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+  rabbitmq:
+    host: 192.168.2.225
+    port: 5672
+    username: admin
+    password: admin12345
+    queueNames: dead,chbus,internaltrade,exporttrade,custdeclare,forex,finance,risk,npms.qmsg,test,fileserver,oper-admin
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      indent_output: false
+      FAIL_ON_EMPTY_BEANS: false
+
+
+
+3des:
+  key: xUHdKxzVCbsgVIwTnc1jtpWn
+
+
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: 'null'
+  global-config:
+    db-column-underline: true
+    refresh-mapper: false
+  mapper-locations: classpath*:/mapper/**/*.xml,classpath*:/mapper/*.xml
+
+env:
+  test: oper-admin
+
+token:
+  expired: 3600 #token失效时间，单位s
+refreshToken:
+  expired: 86400 #refreshToken失效时间，单位s
+
+
+
+eureka:
+  instance:
+    metadata-map:
+      configPath: ${server.servlet.context-path}
+
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: ["prometheus","health"]
+
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 60000
+
+# 角色
+role:
+  acq-marketing-specialist: 8021 #分公司市场专员
+  acq-marketing-manager: 8020 #分公司市场管理人员
+  head-marketing-manager: 8024 #总部市场管理人员
+  acq-operate-user: 8016 #分公司运营人员
+
+# token的rsa秘钥
+auth:
+  rsa-secret: xx1WET12^%3^(WE45}
