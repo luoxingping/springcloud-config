@@ -1,6 +1,6 @@
 spring:
   application:
-    name: oper-admin #服务名称
+    name: oper-admin #鏈嶅姟鍚嶇О
   messages:
     basename: message/messages
   thread:
@@ -39,7 +39,6 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
-
   cloud:
     stream:
       bindings:
@@ -78,7 +77,7 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
 
 server:
-  port: 9210
+  port: 9212
   servlet:
     context-path: /oper-admin
   tomcat:
@@ -97,12 +96,12 @@ logging:
   path: /log/${spring.application.name}
   config: classpath:logback-spring.xml
 
-# Swagger设置  enable 默认为true,为false时，关闭接口展示
+# Swagger璁剧疆  enable 榛樿涓簍rue,涓篺alse鏃讹紝鍏抽棴鎺ュ彛灞曠ず
 swagger:
   enable: true
   version: 1.0
-  title: 权限管理接口
-  description: 权限管理相关接口描述
+  title: 鏉冮檺绠＄悊鎺ュ彛
+  description: 鏉冮檺绠＄悊鐩稿叧鎺ュ彛鎻忚堪
   contact:
     name: ruanmh
     url:
