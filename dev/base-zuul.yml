@@ -1,3 +1,170 @@
-jwt:
-  expire: dev
+spring:
+  application:
+    name: base-zuul
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  redis:
+    hostName: 192.168.2.225
+    port: 6379
+    password: redis12345
+    database: 2
+    timeout: 0
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@//192.168.2.216:1521/GTSSDB
+    username: utgtss2
+    password: zjjygtss2
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
 
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: queue.log.messages
+          binder: local_rabbit
+          group: logMessageConsumers
+        test_input:
+          destination: queue.log.messages1
+          binder: local_rabbit
+          group: logMessageConsumers1
+        output:
+          destination: queue.pretty.log.messages
+          binder: local_rabbit
+        test_output:
+          destination: queue.log.messages1
+          binder: local_rabbit
+          group: logMessageConsumers1
+      binders:
+        local_rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 192.168.2.217
+                port: 5672
+                username: longf
+                password: siiCfl8801
+                virtual-host: /
+  
+server:
+  port: ${microserver.base-zuul.port:8080}
+  tomcat:
+    min-spare-threads: 50
+    max-threads: 200
+
+zuul:
+  ignored-patterns: /**/ace/**
+  prefix: /api/v1    #为zuul设置一个公共的前缀
+  add-host-header: true 
+  stripPrefix: true
+  #retryable: false  #禁止重试
+  ignored-services: hello-service #忽略的service，如果在routes中的设置与此有冲突，以routes为准
+  #stripPrefix: true #转发时去掉Prefix
+  sensitive-headers:
+  sensitiveHeaders:
+  routes:
+    auth:
+      path: /auth/**
+      serviceId: oper-auth
+      stripPrefix: false
+    sys:
+      path: /sys/**
+      serviceId: oper-sys
+    pms:
+      path: /pms/**
+      serviceId: gtss-pms
+      stripPrefix: false
+    bms:
+      path: /bms/**
+      serviceId: nbms-admin
+      stripPrefix: false
+    basic:
+      path: /basic/**
+      serviceId: npms-basic
+      stripPrefix: false
+    buss:
+      path: /buss/**
+      serviceId: npms-buss
+      stripPrefix: false
+    gtss2:
+      path: /gtss2/**
+      serviceId: gtss2
+      stripPrefix: false
+    admin:
+      path: /oper-admin/**
+      serviceId: oper-admin
+      stripPrefix: false
+    report:
+      path: /report/**
+      serviceId: npms-report
+      stripPrefix: false
+    file:
+      path: /file/**
+      serviceId: fileserver
+      stripPrefix: false
+    workflow:
+      path: /workflow/**
+      serviceId: workflow
+      stripPrefix: false
+    demo:
+      path: /demo/**
+      serviceId: server-demo
+      #url: http://localhost:9100/
+    api-b:
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods  #修复zuul跨域配置异常的问题 http://www.jb51.net/article/123406.htm
+      path: /api-b/**
+      serviceId: service-feign
+    host: 
+      connect-timeout-millis: 60000
+      socket-timeout-millis: 60000
+
+base-server:
+  zuul:
+    ignore:
+      startWith: /static,/auth/,/demo,/captcha/jwt,/pms
+    jwt:
+      token-header: Authorization
+      expire: 3600
+    auth:
+      user:
+        token-header: Authorization
+        
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'      
+    
+jwt:
+  expire: 3600
+
+eureka:
+    client:
+        healthcheck:
+            enabled: true   #开启健康检查（需要spring-boot-starter-actuator依赖）
+    instance:
+        lease-renewal-interval-in-seconds: 30   #续约更新时间间隔（默认30秒）
+        lease-expiration-duration-in-seconds: 90  #续约到期时间（默认90秒）
+        instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
