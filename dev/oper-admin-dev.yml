@@ -39,7 +39,6 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
-
   cloud:
     stream:
       bindings:
@@ -78,7 +77,7 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
 
 server:
-  port: 9210
+  port: 9212
   servlet:
     context-path: /oper-admin
   tomcat:
@@ -107,6 +106,3 @@ swagger:
     name: ruanmh
     url:
     mail:
-
-
-
