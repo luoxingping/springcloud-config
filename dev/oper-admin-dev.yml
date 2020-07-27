@@ -1,0 +1,112 @@
+spring:
+  application:
+    name: oper-admin #服务名称
+  messages:
+    basename: message/messages
+  thread:
+    pool:
+      minPoolSize: 2
+      maxPoolSize: 5
+      keepAliveSeconds: 50
+      queueCapacity: 100
+      threadNamePrefix: wf-sync-
+  redis:
+    hostName: 192.168.2.225
+    port: 6379
+    password: redis12345
+    database: 2
+    timeout: 0
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@//192.168.2.216:1521/GTSSDB
+    username: utgtss2
+    password: zjjygtss2
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: queue.log.messages
+          binder: local_rabbit
+          group: logMessageConsumers
+        test_input:
+          destination: queue.log.messages1
+          binder: local_rabbit
+          group: logMessageConsumers1
+        output:
+          destination: queue.pretty.log.messages
+          binder: local_rabbit
+        test_output:
+          destination: queue.log.messages1
+          binder: local_rabbit
+          group: logMessageConsumers1
+      binders:
+        local_rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 192.168.2.217
+                port: 5672
+                username: longf
+                password: siiCfl8801
+                virtual-host: /
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+
+server:
+  port: 9210
+  servlet:
+    context-path: /oper-admin
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 100
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://BASE-EUREKA:8761/eureka
+
+
+logging:
+  path: /log/${spring.application.name}
+  config: classpath:logback-spring.xml
+
+# Swagger设置  enable 默认为true,为false时，关闭接口展示
+swagger:
+  enable: true
+  version: 1.0
+  title: 权限管理接口
+  description: 权限管理相关接口描述
+  contact:
+    name: ruanmh
+    url:
+    mail:
+
+
+
