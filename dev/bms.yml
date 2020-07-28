@@ -66,11 +66,11 @@ spring:
     password: admin12345
   mail:
     default-encoding: UTF-8
-    host: smtp.qq.com
-    password: luo3274251
+    host: smtp.126.com
+    password: lgw1993
     port: 25
     protocol: smtp
-    username: 449727906@qq.com
+    username: lgw_999
   cloud:
     stream:
       bindings:
