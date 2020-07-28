@@ -57,10 +57,6 @@ spring:
   application:
     name: workflow #服务名称
   cloud:
-    config:
-      discovery:
-        enabled: true #启用发现服务功能
-        service-id: workflow-config #指定服务名称
     stream:
       bindings:
         output: #发送给客户端的消息队列
