@@ -1,0 +1,115 @@
+server:
+  servlet:
+    context-path: /gtss2
+    session:
+      timeout: PT30M
+  port: 8070
+swagger:
+  enable:true
+spring:
+  application:
+    name: gtss
+  redis:
+    hostName: 192.168.2.238
+    port: 6379
+    password:
+    database: 2
+    timeout: 0
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+  cloud:
+    stream:
+      bindings:
+        input: #出款服务中心接收的消息队列
+          destination: npmsclient
+          group: qmsg
+        output:
+          destination: npmsclient
+          group: qmsg
+        gchbiinput: #发送给通道服务的消息队列
+          destination: chbigtss
+          group: qmsg
+        gchbioutput: #发送给客户端的消息队列
+          destination: gtsschbi
+          group: qmsg
+  rabbitmq:
+    host: 192.168.2.225
+    port: 5672
+    username: admin
+    password: admin12345
+
+  freemarker:
+    template-loader-path: classpath:/templates
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    request-context-attribute: request
+    suffix: .ftl
+#    fontPath: /root/src/fonts
+    fontPath: D:\workspace\ngtss2\branches\ngtss2.4.5\src\main\resources\fonts
+    
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://BASE-EUREKA:8761/eureka
+      #defaultZone: http://192.168.2.215:8761/eureka
+      #defaultZone: http://192.168.2.237:8761/eureka
+    
+jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    
+# logging:
+#  path: /log/amout/${spring.application.name}
+#  config: classpath:logback-spring.xml
+
+#mybatis-plus:
+#  configuration:
+#    cache-enabled: false
+#    map-underscore-to-camel-case: true
+#  global-config:
+#    db-column-underline: true
+#    refresh-mapper: false
+#  mapper-locations: classpath*:/mapper/**/*.xml
+
+
+3des:
+  key: xUHdKxzVCbsgVIwTnc1jtpWn
+md5:
+  key: gg
+
+logging:
+  level:
+    log4j.logger.UserDAO: debug
+    
+#mybatis
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+auout:
+   money:
+      host: 192.168.2.217
+      port: 5672
+      username: longf
+      password: siiCfl8801
+      mqnm: qmsg
+      exchange: npmsclient
+      header.key: platCode
+      header.value: gtss2
+      
+multipart:
+  enabled: true
+  max-file-size: 50mb
+  max-request-size: 50mb
+   
