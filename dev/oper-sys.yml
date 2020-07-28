@@ -6,20 +6,20 @@ spring:
     time-zone: GMT+8
     default-property-inclusion: non_null
   datasource:
-    #JDBC ÅäÖÃ
+    #JDBC é…ç½®
     url: jdbc:oracle:thin:@192.168.2.216:1521:GTSSDB
     username: utgtss2
     password: zjjygtss2
     driver-class-name: oracle.jdbc.driver.OracleDriver
     #druid:      #https://github.com/alibaba/druid/blob/master/druid-spring-boot-starter/src/test/resources/application.properties
-    #Á¬½Ó³ØÅäÖÃ
+    #è¿æ¥æ± é…ç½®
     initial-size: 1
     max-active: 20
     min-idle: 1
     max-wait: 60000
     pool-prepared-statements: true
     max-pool-prepared-statement-per-connection-size: 20
-    # max-open-prepared-statements: #ºÍÉÏÃæµÄµÈ¼Û
+    # max-open-prepared-statements: #å’Œä¸Šé¢çš„ç­‰ä»·
     validation-query: SELECT 'x' from dual
     #validation-query-timeout:
     test-on-borrow: false
@@ -28,7 +28,7 @@ spring:
     time-between-eviction-runs-millis: 60000
     min-evictable-idle-time-millis: 300000
     #max-evictable-idle-time-millis:
-    #filters: #ÅäÖÃ¶à¸öÓ¢ÎÄ¶ººÅ·Ö¸ô
+    #filters: #é…ç½®å¤šä¸ªè‹±æ–‡é€—å·åˆ†éš”
   redis:
     hostName: 192.168.2.225
     port: 6379
@@ -78,7 +78,7 @@ mybatis:
   mapper-locations: "classpath*:mapper/*.xml"
 
 server:
-  port: ${microserver.oper-auth.port:8940} #Æô¶¯¶Ë¿Ú
+  port: ${microserver.oper-auth.port:8940} #å¯åŠ¨ç«¯å£
   tomcat:
     min-spare-threads: 20
     max-threads: 200
@@ -98,5 +98,3 @@ eureka:
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
-
-
