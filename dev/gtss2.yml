@@ -8,7 +8,7 @@ swagger:
   enable:true
 spring:
   application:
-    name: gtss
+    name: gtss2
   redis:
     hostName: 192.168.2.238
     port: 6379
