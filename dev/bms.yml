@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /bms
-  port: ${microserver.bms.port:9851} #启动端口
+  port: ${microserver.bms.port:8972} #启动端口
 
 spring:
   application:
@@ -66,11 +66,11 @@ spring:
     password: admin12345
   mail:
     default-encoding: UTF-8
-    host: smtp.126.com
-    password: lgw1993
+    host: smtp.qq.com
+    password: luo3274251
     port: 25
     protocol: smtp
-    username: lgw_999
+    username: 449727906@qq.com
   cloud:
     stream:
       bindings:
