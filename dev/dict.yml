@@ -1,5 +1,5 @@
 server:
-  port: 8915
+  port: 8071
   servlet:
     context-path: /dict
 
