@@ -1,88 +1,87 @@
 spring:
-    application:
-        name: oper-auth
-    jackson:
-        date-format: yyyy-MM-dd HH:mm:ss
-        time-zone: GMT+8
-        default-property-inclusion: non_null
-    redis:
-      hostName: 192.168.2.225
-      port: 6379
-      password: redis12345
-      database: 2
-      timeout: 0
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 8
-        min-idle: 0
-    datasource:
-      type: com.alibaba.druid.pool.DruidDataSource
-      driver-class-name: oracle.jdbc.driver.OracleDriver
-      url: jdbc:oracle:thin:@//192.168.2.216:1521/GTSSDB
-      username: utgtss2
-      password: zjjygtss2
-      initialSize: 5
-      minIdle: 5
-      maxActive: 20
-      maxWait: 60000
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: SELECT 1 FROM DUAL
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: true
-      maxPoolPreparedStatementPerConnectionSize: 20
+  application:
+    name: oper-auth
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  redis:
+    hostName: 192.168.2.225
+    port: 6379
+    password: redis12345
+    database: 2
+    timeout: 0
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@//192.168.2.216:1521/GTSSDB
+    username: utgtss2
+    password: zjjygtss2
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
 
-    cloud:
-      stream:
-        bindings:
-          input:
-            destination: queue.log.messages
-            binder: local_rabbit
-            group: logMessageConsumers
-          test_input:
-            destination: queue.log.messages1
-            binder: local_rabbit
-            group: logMessageConsumers1
-          output:
-            destination: queue.pretty.log.messages
-            binder: local_rabbit
-          test_output:
-            destination: queue.log.messages1
-            binder: local_rabbit
-            group: logMessageConsumers1
-        binders:
-          local_rabbit:
-            type: rabbit
-            environment:
-              spring:
-                rabbitmq:
-                  host: 192.168.2.217
-                  port: 5672
-                  username: longf
-                  password: siiCfl8801
-                  virtual-host: /
-  
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: queue.log.messages
+          binder: local_rabbit
+          group: logMessageConsumers
+        test_input:
+          destination: queue.log.messages1
+          binder: local_rabbit
+          group: logMessageConsumers1
+        output:
+          destination: queue.pretty.log.messages
+          binder: local_rabbit
+        test_output:
+          destination: queue.log.messages1
+          binder: local_rabbit
+          group: logMessageConsumers1
+      binders:
+        local_rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 192.168.2.217
+                port: 5672
+                username: longf
+                password: siiCfl8801
+                virtual-host: /
+
 server:
-  port: ${microserver.oper-auth.port:8950} #Æô¶¯¶Ë¿Ú
+  port: ${microserver.oper-auth.port:8950} #å¯åŠ¨ç«¯å£
   tomcat:
     min-spare-threads: 20
     max-threads: 200
 
 eureka:
-    instance:
-        lease-renewal-interval-in-seconds: 30   #ĞøÔ¼¸üĞÂÊ±¼ä¼ä¸ô£¨Ä¬ÈÏ30Ãë£©
-        lease-expiration-duration-in-seconds: 90  #ĞøÔ¼µ½ÆÚÊ±¼ä£¨Ä¬ÈÏ90Ãë£©
-        instance-id:  ${spring.cloud.client.ip-address}:${server.port}
-    client:
-        healthcheck:
-            enabled: true   #¿ªÆô½¡¿µ¼ì²é£¨ĞèÒªspring-boot-starter-actuatorÒÀÀµ£©
+  instance:
+    lease-renewal-interval-in-seconds: 30   #ç»­çº¦æ›´æ–°æ—¶é—´é—´éš”ï¼ˆé»˜è®¤30ç§’ï¼‰
+    lease-expiration-duration-in-seconds: 90  #ç»­çº¦åˆ°æœŸæ—¶é—´ï¼ˆé»˜è®¤90ç§’ï¼‰
+    instance-id:  ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    healthcheck:
+      enabled: true   #å¼€å¯å¥åº·æ£€æŸ¥ï¼ˆéœ€è¦spring-boot-starter-actuatorä¾èµ–ï¼‰
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
 
 
 
-    
