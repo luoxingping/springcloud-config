@@ -38,6 +38,8 @@ db:
     gtss2DbTheme: gtss2 #外综数据库主题名称
 
 spring:
+  application:
+    name: chbus
   redis:
     hostName: 192.168.2.225
     port: 6379
