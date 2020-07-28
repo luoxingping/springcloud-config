@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /bms
-  port: ${microserver.bms.port:8972} #启动端口
+  port: ${microserver.bms.port:9851} #启动端口
 
 spring:
   application:
