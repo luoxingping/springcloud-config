@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: oper-sys
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -69,7 +71,7 @@ spring:
                 password: siiCfl8801
                 virtual-host: /
 
-    
+
 mybatis:
   basepackage: com.sctoc.microserver.oper.sys.mapper
   #xmlLocation: classpath:mapper/**/*.xml
@@ -83,7 +85,7 @@ server:
 logging:
   level:
     org.hibernate.SQL: debug
-    
+
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 30
