@@ -12,7 +12,7 @@ spring:
   redis:
     hostName: 192.168.2.225
     port: 6379
-    password:
+    password: redis12345
     database: 2
     timeout: 0
     pool:
