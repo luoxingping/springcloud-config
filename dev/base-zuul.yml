@@ -59,7 +59,7 @@ spring:
           environment:
             spring:
               rabbitmq:
-                host: 192.168.2.217
+                host: 192.168.2.225
                 port: 5672
                 username: longf
                 password: siiCfl8801

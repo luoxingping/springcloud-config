@@ -10,7 +10,7 @@ spring:
   application:
     name: gtss2
   redis:
-    hostName: 192.168.2.238
+    hostName: 192.168.2.225
     port: 6379
     password:
     database: 2

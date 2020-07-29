@@ -36,19 +36,11 @@ swagger:
      name: zhangyh
      url:
      mail:
-  
-
-
+ 
 
 spring:
   application:
     name: fileserver #服务名称
-  cloud:
-    config:
-      profile: ${spring.profiles.active:dev}
-      discovery:
-        enabled: true #启用发现服务功能
-        service-id: once-config #指定服务名称
   messages:
     basename: message/messages
   redis:

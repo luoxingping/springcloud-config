@@ -59,7 +59,7 @@ spring:
           environment:
             spring:
               rabbitmq:
-                host: 192.168.2.217
+                host: 192.168.2.225
                 port: 5672
                 username: longf
                 password: siiCfl8801
@@ -73,12 +73,12 @@ server:
 
 eureka:
   instance:
-    lease-renewal-interval-in-seconds: 30   #续约更新时间间隔（默认30秒）
-    lease-expiration-duration-in-seconds: 90  #续约到期时间（默认90秒）
+    lease-renewal-interval-in-seconds: 30   #续约更新时间间隔（默�?0秒）
+    lease-expiration-duration-in-seconds: 90  #续约到期时间（默�?0秒）
     instance-id:  ${spring.cloud.client.ip-address}:${server.port}
   client:
     healthcheck:
-      enabled: true   #开启健康检查（需要spring-boot-starter-actuator依赖）
+      enabled: true   #开启健康检查（需要spring-boot-starter-actuator依赖�?
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
