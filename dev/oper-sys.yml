@@ -12,7 +12,7 @@ spring:
     password: zjjygtss2
     driver-class-name: oracle.jdbc.driver.OracleDriver
     #druid:      #https://github.com/alibaba/druid/blob/master/druid-spring-boot-starter/src/test/resources/application.properties
-    #连接池配�?
+    #连接池配罿
     initial-size: 1
     max-active: 20
     min-idle: 1
