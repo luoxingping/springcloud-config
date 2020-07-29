@@ -41,18 +41,7 @@ spring:
     username: admin
     password: admin12345
 
-  freemarker:
-    template-loader-path: classpath:/templates
-    cache: false
-    charset: UTF-8
-    check-template-location: true
-    content-type: text/html
-    expose-request-attributes: false
-    expose-session-attributes: false
-    request-context-attribute: request
-    suffix: .ftl
-#    fontPath: /root/src/fonts
-    fontPath: D:\workspace\ngtss2\branches\ngtss2.4.5\src\main\resources\fonts
+
     
 
 
@@ -62,25 +51,12 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://BASE-EUREKA:8761/eureka
-      #defaultZone: http://192.168.2.215:8761/eureka
-      #defaultZone: http://192.168.2.237:8761/eureka
+
     
 jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     
-# logging:
-#  path: /log/amout/${spring.application.name}
-#  config: classpath:logback-spring.xml
-
-#mybatis-plus:
-#  configuration:
-#    cache-enabled: false
-#    map-underscore-to-camel-case: true
-#  global-config:
-#    db-column-underline: true
-#    refresh-mapper: false
-#  mapper-locations: classpath*:/mapper/**/*.xml
 
 
 3des:
@@ -92,9 +68,6 @@ logging:
   level:
     log4j.logger.UserDAO: debug
     
-#mybatis
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 auout:
