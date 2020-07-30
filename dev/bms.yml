@@ -60,7 +60,7 @@ spring:
   #    username: longf
   #    password: siiCfl8801
   rabbitmq:
-    host: 192.168.2.225
+    host: 192.168.2.238
     port: 5672
     username: admin
     password: admin12345
