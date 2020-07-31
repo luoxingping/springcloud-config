@@ -69,8 +69,8 @@ spring:
   cloud:
     stream:
       bindings:
-        input:
-          destination: nbms
+        input: #消息通道服务接收的消息队列
+          destination: nbmschannel
           group: qmsg
         output:
           destination: nbms
@@ -78,6 +78,15 @@ spring:
         wxoutput:
           destination: nbmssub
           group: qwxmsg
+        channeloutput: #发送给通道服务的消息队列
+          destination: nbmschannel
+          group: qmsg
+        clientoutput: #发送给客户端的消息队列
+          destination: nbmsclient
+          group: qmsg
+        retryoutput: #重发给通道服务的消息队列
+          destination: nbmschannel
+          group: qmsg
 
 wxConfig:
   appId: wxa2d8551a8bc2636a #正式公众号 appId
