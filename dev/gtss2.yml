@@ -10,7 +10,7 @@ spring:
   application:
     name: gtss2
   redis:
-    hostName: 192.168.2.225
+    hostName: 192.168.2.238
     port: 6379
     password: redis12345
     database: 2
@@ -36,21 +36,10 @@ spring:
           destination: gtsschbi
           group: qmsg
   rabbitmq:
-    host: 192.168.2.225
+    host: 192.168.2.238
     port: 5672
     username: admin
     password: admin12345
-
-
-    
-
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://BASE-EUREKA:8761/eureka
 
     
 jackson:

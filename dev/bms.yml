@@ -54,11 +54,6 @@ spring:
     removeAbandonedTimeout: 1800
     logAbandoned: true
 
-  #  rabbitmq:
-  #    host: 192.168.2.217
-  #    port: 5672
-  #    username: longf
-  #    password: siiCfl8801
   rabbitmq:
     host: 192.168.2.238
     port: 5672
