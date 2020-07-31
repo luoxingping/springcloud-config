@@ -62,10 +62,10 @@ spring:
   mail:
     default-encoding: UTF-8
     host: smtp.126.com
-    password: lgw1993
+    password: MLRPWDPLTCRNUEDO
     port: 25
     protocol: smtp
-    username: lgw_999
+    username: luo449727906@126.com
   cloud:
     stream:
       bindings:
