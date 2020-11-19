@@ -1,0 +1,153 @@
+server:
+  servlet:
+    context-path: /bms
+  port: ${microserver.bms.port:8972} #启动端口
+
+spring:
+  application:
+    name: bms
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      indent_output: false
+      FAIL_ON_EMPTY_BEANS: false
+  datasource:
+    druid:      #https://github.com/alibaba/druid/blob/master/druid-spring-boot-starter/src/test/resources/application.properties
+      #连接池配置
+      initial-size: 1
+      max-active: 20
+      min-idle: 1
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # max-open-prepared-statements: #和上面的等价
+      validation-query: SELECT 'x' from dual
+      #validation-query-timeout:
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #max-evictable-idle-time-millis:
+      #filters: #配置多个英文逗号分隔
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//192.168.2.216:1521/GTSSDB
+    username: bnss
+    password: bnss
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    removeAbandoned: true
+    removeAbandonedTimeout: 1800
+    logAbandoned: true
+
+  rabbitmq:
+    host: 192.168.2.238
+    port: 5672
+    username: admin
+    password: admin12345
+  mail:
+    default-encoding: UTF-8
+    host: smtp.126.com
+    password: MLRPWDPLTCRNUEDO
+    port: 25
+    protocol: smtp
+    username: luo449727906@126.com
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: nbms
+          group: qmsg
+        wxoutput:
+          destination: nbmssub
+          group: qwxmsg
+
+        input: #消息服务中心接收的消息队列
+            destination: nbms
+            group: qmsg
+        channeloutput: #发送给通道服务的消息队列
+            destination: nbmschannel
+            group: qmsg
+        clientoutput: #发送给客户端的消息队列
+            destination: nbmsclient
+            group: qmsg
+
+        channelinput: #消息通道服务接收的消息队列
+            destination: nbmschannel
+            group: qmsg
+        retryoutput: #重发给通道服务的消息队列
+            destination: nbmschannel
+            group: qmsg
+
+wxConfig:
+  appId: wxa2d8551a8bc2636a #正式公众号 appId
+  secret: 8b0c8862b86ffa20dcc6869a62e830cd
+  token: sctoc
+  #  appId: wxc2a3d84a0510521f #测试公众号 appId
+  #  secret: 676a84a3b8be0490d5fe3745e60473d1
+  #  token: test
+  getCodeUrl: https://open.weixin.qq.com/connect/oauth2/authorize?
+  redirectUrl: http://weixin.sctoc.com/bms/bind/selectOpenId
+  responseType: code
+  scope:        snsapi_userinfo
+  grantType:    authorization_code
+  getAccessToken: https://api.weixin.qq.com/sns/oauth2/access_token?
+  getUrl:  http://weixin.sctoc.com/bms/register.html
+
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+mybatis:
+  basepackage: com.sctoc.bms.mapper
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.sctoc.bms.domain
+  configuration:
+    map-underscore-to-camel-case: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://BASE-EUREKA:8761/eureka
+
+sms:
+  server:
+    testSwitch: 0 #测试挡板开关0关闭；1打开
+    userid: E102IH #用户名
+    password: 84s2uG #密码
+    ipAddrSouth: api01.monyun.cn:7901 #南方短信站点
+    ipAddrNorth: api02.monyun.cn:7901 #北方短信站点
+    requestPath: /sms/v2/std/ #短信请求地址
+    retrySwitch: 1 #重发机制开关0关闭；1打开
+    retryCount: 23 #重发次数
+    retryInterval: 260 #重发间隔时间
+
+email:
+  server:
+    fromEmail: lgw_999@126.com #发件人
+    retrySwitch: 1 #重发机制开关0关闭；1打开
+    retryCount: 33 #重发次数
+    retryInterval: 360 #重发间隔时间
